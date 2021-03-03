@@ -1,9 +1,10 @@
 import React, { useCallback, useState, useRef } from 'react';
 import './App.css';
 import produce from 'immer'
+import { useSpring, animated } from 'react-spring'
 
-const numRows = 50;
-const numCols = 50;
+const numRows = 40;
+const numCols = 40;
 
 const operations = [
   [0, 1],
@@ -62,15 +63,27 @@ const App = () => {
   }, [])
 
   return (
-    <>
+    <div style={{
+      justifyContent: "center",
+      display: "flex",
+      flexDirection: "row",
+    }}>
       <button
         onClick={() => {
           setRunning(!running);
           runningRef.current = true;
           runSimulation();
         }}
+        style= {{
+          height: "3em",
+          width: "6em",
+          borderRadius: "50px",
+          borderStyle: "none",
+          outline: "none",
+          cursor: "pointer"
+        }}
       >
-        {running ? "stop" : "start"}</button>
+        {running ? "STOP" : "START"}</button>
       <div style={{
         display: 'grid',
         gridTemplateColumns: `repeat(${numCols}, 20px)`
@@ -95,7 +108,7 @@ const App = () => {
           ))
         )}
       </div>  
-    </>
+    </div>
   );
 }
 
