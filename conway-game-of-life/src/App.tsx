@@ -1,7 +1,7 @@
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 import './App.css';
 import produce from 'immer'
-import { useSpring, animated } from 'react-spring'
+import Button from "@material-ui/core/Button"
 
 const numRows = 40;
 const numCols = 40;
@@ -18,6 +18,10 @@ const operations = [
 ];
 
 const App = () => {
+
+  const setup = useEffect(() => {
+    document.body.style.backgroundColor = "#040F16"
+  }, []);
 
   const [grid, setGrid] = useState(() => {
     const rows = [];
@@ -64,26 +68,25 @@ const App = () => {
 
   return (
     <div style={{
+      backgroundColor: "#040F16 ",
+      height: "100%",
       justifyContent: "center",
       display: "flex",
-      flexDirection: "row",
     }}>
-      <button
+      <Button
         onClick={() => {
           setRunning(!running);
           runningRef.current = true;
           runSimulation();
         }}
-        style= {{
+        color="primary"
+        variant="contained"
+        style={{
           height: "3em",
-          width: "6em",
-          borderRadius: "50px",
-          borderStyle: "none",
-          outline: "none",
-          cursor: "pointer"
+          width: "6em"
         }}
       >
-        {running ? "STOP" : "START"}</button>
+        {running ? "STOP" : "START"}</Button>
       <div style={{
         display: 'grid',
         gridTemplateColumns: `repeat(${numCols}, 20px)`
@@ -101,8 +104,8 @@ const App = () => {
               style={{
                 width: 20, 
                 height: 20,
-                backgroundColor: grid[i][k] ? 'black' : undefined,
-                border: "solid 1px black",
+                backgroundColor: grid[i][k] ? '#0094C6' : undefined,
+                border: "solid 1px #364156",
               }}
             />
           ))
